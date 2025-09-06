@@ -23,7 +23,7 @@ import yaml
 from pydantic import BaseSettings, Field
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 ENV_FILE = ROOT / ".env"
 YAML_PATH = ROOT / "config" / "config.yaml"
 
@@ -144,5 +144,6 @@ if __name__ == "__main__":
     cfg = get_config()
     print("APP ENV:", cfg.get_env("APP_ENV"))
     print("DHAN SANDBOX:", cfg.get_env("DHAN_SANDBOX"))
+    print("Database URL:", cfg.get_env("DATABASE_URL"))
     print("Dhan YAML section:", cfg.get_section("dhan"))
     print("Risk limits:", cfg.get_section("risk_limits"))
