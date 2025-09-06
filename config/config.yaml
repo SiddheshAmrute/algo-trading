@@ -1,0 +1,70 @@
+# -----------------------------------------------------------------------------
+# Application
+# -----------------------------------------------------------------------------
+app:
+  env: development
+  host: 0.0.0.0
+  port: 8000
+  debug: true
+
+# -----------------------------------------------------------------------------
+# Database
+# -----------------------------------------------------------------------------
+database:
+  echo: false   # overrides .env DATABASE_ECHO if not set
+
+# -----------------------------------------------------------------------------
+# Broker (Dhan API)
+# -----------------------------------------------------------------------------
+dhan:
+  sandbox: true   # fallback if DHAN_SANDBOX not set in .env
+  base_url: "https://api.dhan.co/v2"
+  sandbox_base_url: "https://sandbox.dhan.co/v2"
+  candle_endpoint: "/data/historical/candles"
+  order_endpoint: "/orders"
+  portfolio_endpoint: "/portfolio/positions"
+
+# -----------------------------------------------------------------------------
+# Risk Management
+# -----------------------------------------------------------------------------
+risk_limits:
+  max_daily_loss: -3000          # Max allowed total loss (₹)
+  max_open_trades: 10            # Max simultaneous trades
+  max_single_trade_loss: -2000   # Max loss per trade (₹)
+  max_deployment_percent: 80     # Max capital % deployed at any time
+  trade_cutoff_hour: 15          # No new trades after 3 PM (24h format)
+
+# -----------------------------------------------------------------------------
+# Indicators configuration
+# -----------------------------------------------------------------------------
+indicators:
+  store_in_db: false
+
+  ema_periods: [5, 13, 25, 50, 100, 200]
+  rsi_period: 14
+  macd:
+    fast: 12
+    slow: 26
+    signal: 9
+  stochastic:
+    k_period: 14
+    d_period: 3
+  bollinger:
+    stds: [2, 3]
+    period: 20
+  atr_period: 14
+  di_adx_period: 14
+  supertrend:
+    atr_period: 10
+    multiplier: 3.0
+  volume_sma_period: 10
+  historic_volatility_period: 20
+
+# -----------------------------------------------------------------------------
+# Telegram notifications
+# -----------------------------------------------------------------------------
+telegram:
+  enabled: true
+  notify_on_order: true
+  notify_on_error: true
+  notify_on_cutoff: true
